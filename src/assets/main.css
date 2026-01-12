@@ -1,0 +1,83 @@
+@import './base.css';
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-muted-gold: #C2B280;
+  --color-rich-brown: #7D5B3A;
+  --color-soft-orange: #D9BF77;
+  --color-soft-mint: #A8D8B9;
+  --color-very-dark-grayish-blue: #4B4E6D;
+}
+
+:root {
+  --dp-font-family: -apple-system, blinkmacsystemfont, "Segoe UI", roboto, oxygen, ubuntu, cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  --dp-border-radius: 8px;
+  --dp-cell-border-radius: 4px;
+  --dp-common-transition: all 0.2s ease-in;
+  --dp-button-height: 35px;
+  --dp-month-year-row-height: 35px;
+  --dp-month-year-row-button-size: 35px;
+  --dp-button-icon-height: 20px;
+  --dp-cell-size: 40px;
+  --dp-cell-padding: 5px;
+  --dp-common-padding: 10px;
+  --dp-input-icon-padding: 35px;
+  --dp-input-padding: 6px 30px 6px 12px;
+  --dp-menu-min-width: 300px;
+  --dp-action-buttons-padding: 2px 5px;
+  --dp-row-margin: 5px 0;
+  --dp-calendar-header-cell-padding: 0.5rem;
+  --dp-two-calendars-spacing: 10px;
+  --dp-overlay-col-padding: 3px;
+  --dp-time-inc-dec-button-size: 32px;
+  --dp-menu-padding: 6px 8px;
+  --dp-font-size: 1rem;
+  --dp-preview-font-size: 0.8rem;
+  --dp-time-font-size: 0.8rem;
+  --dp-animation-duration: 0.2s;
+  --dp-menu-appear-transition-timing: cubic-bezier(.4, 0, 1, 1);
+  --dp-transition-timing: ease-out;
+  /* Цвета из схемы */
+  --dp-primary-color: red !important;
+  --dp-secondary-color: #7D5B3A;
+  --dp-success-color: #A8D8B9;
+  --dp-danger-color: #D9BF77;
+  --dp-warning-color: #4B4E6D;
+}
+
+#app {
+  min-height: 100vh;
+  max-width: 2560px;
+  width: 100%;
+  margin: 0 auto;
+  font-weight: normal;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+  padding: 2px;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+html {
+  background: #f0f0f0;
+}
+
+html.dark {
+  background: #070707 !important;
+}
+
+input {
+  border: 1px solid green;
+  border-radius: 10px;
+  padding: 2px;
+}

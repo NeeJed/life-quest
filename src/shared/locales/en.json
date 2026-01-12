@@ -1,0 +1,98 @@
+{
+  "nav": {
+    "home": "Home",
+    "transactions": "Transactions",
+    "budgets": "Budgets",
+    "dashboard": "Dashboard",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "hello": "Hello"
+  },
+  "auth": {
+    "loginTitle": "Login",
+    "registerTitle": "Registration",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "loginButton": "Login",
+    "registerButton": "Register",
+    "noAccount": "No account?",
+    "hasAccount": "Already have an account?",
+    "loading": "Loading...",
+    "error": "Error",
+    "loginSuccess": "Login successfully",
+    "loginError": "Login error",
+    "registerSuccess": "Register success",
+    "registerError": "Register error"
+  },
+  "budget": {
+    "addTitle": "Add New Budget",
+    "category": "Category",
+    "selectCategory": "Select category",
+    "limit": "Limit (RUB)",
+    "addButton": "Add Budget",
+    "duplicateError": "Budget for this category already exists",
+    "chartTitle": "Budget by categories",
+    "doughnut": "Doughnut",
+    "bar": "Bar",
+    "line": "Line",
+    "spentLabel": "Spent",
+    "datasetLabel": "Spent by budget",
+    "alertMessage": "Budget '{category}' exceeded by {percent}%!",
+    "addSuccess": "Budget added"
+  },
+  "category": {
+    "selectCategory": "Select category",
+    "food": "Food",
+    "transport": "Transport",
+    "health": "Health",
+    "gov": "Government"
+  },
+  "transaction": {
+    "addTitle": "Add Transaction",
+    "amount": "Amount",
+    "type": "Type",
+    "income": "Income",
+    "expense": "Expense",
+    "description": "Description",
+    "addButton": "Add",
+    "required": "Required",
+    "amountRequired": "Fill the field 'Amount'",
+    "amountPositive": "Amount must be more then zero",
+    "categoryRequired": "Select category",
+    "typeRequired": "Select type",
+    "categoryInvalid": "Category error: not exist",
+    "invalidEmail": "Invalid email",
+    "minLength": "Minimum 6 characters",
+    "errorSum": "Input in field 'Sum'",
+    "noTransactions": "No transactions",
+    "delete": "Delete",
+    "allTypes": "All Types",
+    "allCategories": "All Categories",
+    "searchPlaceholder": "Search",
+    "exportButton": "Export CSV",
+    "importButton": "Import CSV",
+    "importSuccess": "Imported successfully",
+    "importError": "Import error",
+    "addSuccess": "Transaction added",
+    "addError": "Transaction adding error",
+    "deleteSuccess": "Transaction deleted"
+  },
+  "theme": {
+    "label": "Theme:",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "common": {
+    "welcome": "Welcome to Finance Tracker",
+    "offline": "Offline mode: data saved locally"
+  },
+  "i18n": {
+    "language": "Language"
+  },
+  "notifications": {
+    "acceptNotifications": "Accept notifications"
+  }
+}

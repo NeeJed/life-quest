@@ -1,0 +1,100 @@
+{
+  "nav": {
+    "home": "Главная",
+    "transactions": "Транзакции",
+    "budgets": "Бюджеты",
+    "dashboard": "Доска",
+    "login": "Вход",
+    "register": "Регистрация",
+    "logout": "Выход",
+    "hello": "Привет"
+  },
+  "auth": {
+    "loginTitle": "Вход",
+    "registerTitle": "Регистрация",
+    "name": "Имя",
+    "email": "Email",
+    "password": "Пароль",
+    "loginButton": "Войти",
+    "registerButton": "Зарегистрироваться",
+    "registration": "Регистрация...",
+    "loggining": "Вход...",
+    "noAccount": "Нет аккаунта?",
+    "hasAccount": "Уже есть аккаунт?",
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "loginSuccess": "Авторизация прошла успешно",
+    "loginError": "Ошибка входа",
+    "registerSuccess": "Регистрация прошла успешно",
+    "registerError": "Ошибка регистрации"
+  },
+  "budget": {
+    "addTitle": "Добавить новый бюджет",
+    "category": "Категория",
+    "selectCategory": "Выберите категорию",
+    "limit": "Лимит (руб.)",
+    "addButton": "Добавить бюджет",
+    "duplicateError": "Бюджет для этой категории уже существует",
+    "chartTitle": "Бюджет по категориям",
+    "doughnut": "Круговой",
+    "bar": "Столбчатый",
+    "line": "Линейный",
+    "spentLabel": "Потрачено",
+    "datasetLabel": "Расходы по бюджету",
+    "alertMessage": "Бюджет '{category}' истрачен на {percent}%!",
+    "addSuccess": "Бюджет добавлен"
+  },
+  "category": {
+    "selectCategory": "Выберите категорию",
+    "food": "Еда",
+    "transport": "Транспорт",
+    "health": "Здоровье",
+    "gov": "Государственные"
+  },
+  "transaction": {
+    "addTitle": "Добавить транзакцию",
+    "amount": "Сумма",
+    "type": "Тип",
+    "income": "Доход",
+    "expense": "Расход",
+    "description": "Описание",
+    "addButton": "Добавить",
+    "required": "Обязательно",
+    "amountRequired": "Заполните поле 'Сумма'",
+    "amountPositive": "Сумма должна быть больше нуля",
+    "categoryRequired": "Выберите категорию",
+    "typeRequired": "Выберите тип",
+    "categoryInvalid": "Ошибка категории: не существует",
+    "invalidEmail": "Неверный email",
+    "minLength": "Минимум 6 символов",
+    "errorSum": "Заполните поле 'Сумма'",
+    "noTransactions": "Транзакции отсутствуют",
+    "delete": "Удалить",
+    "allTypes": "Все типы",
+    "allCategories": "Все категории",
+    "searchPlaceholder": "Поиск",
+    "exportButton": "Экспорт в CSV",
+    "importButton": "Импорт в CSV",
+    "importSuccess": "Данные успешно импортированы",
+    "importError": "Ошибка импорта",
+    "addSuccess": "Транзакция добавлена",
+    "addError": "Ошибка добавления транзакции",
+    "deleteSuccess": "Транзакция удалена"
+  },
+  "theme": {
+    "label": "Тема:",
+    "light": "Светлая",
+    "dark": "Тёмная",
+    "system": "Системная"
+  },
+  "common": {
+    "welcome": "Добро пожаловать в Finance Tracker",
+    "offline": "Оффлайн-режим: данные сохранены локально"
+  },
+  "i18n": {
+    "language": "Язык"
+  },
+  "notifications": {
+    "acceptNotifications": "Разрешить уведомления"
+  }
+}
