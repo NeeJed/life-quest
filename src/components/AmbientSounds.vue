@@ -1,11 +1,11 @@
 <template>
   <div class="ambient-sounds">
     <div v-if="isMenuOpen" class="flex flex-col gap-1 animate-fade-in">
-      <BaseButton v-for="sound in sounds" :key="sound.key" @click="toggleSound(sound.key)" :variant="activeSounds.includes(sound.key) ? 'primary' : 'secondary'">
+      <BaseButton v-for="sound in sounds" :key="sound.key" @click="toggleSound(sound.key)" :variant="activeSounds.includes(sound.key) ? 'primary' : 'secondary'" class="w-28 h-12">
         {{ sound.icon }} {{ sound.label }}
       </BaseButton>
     </div>
-    <BaseButton @click="toggleMenu" variant="secondary" class="mt-2!">
+    <BaseButton @click="toggleMenu" variant="secondary" class="mt-2!" title="Фоновые звуки">
       🌤️
     </BaseButton>
   </div>
@@ -13,7 +13,6 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import BaseButton from '@/shared/ui/BaseButton.vue'
 import { useGameStore } from '@/stores/game'
 import { useAudio } from '@/shared/hooks/useAudio'
 
@@ -54,20 +53,20 @@ const toggleSound = (key: string) => {
     // Включить
     const audio = new Audio(sound.url)
     audio.loop = true
-    audio.volume = 0.3 * ambientVolume.value * masterVolume.value // Низкая громкость для фона
+    audio.volume = store.ambientVolume * store.masterVolume // Низкая громкость для фона
     audio.play().catch(err => console.error('Ambient sound failed:', err))
     soundInstances.value[key] = audio
     activeSounds.value.push(key)
   }
 }
 
-watch(() => ambientVolume, (newVol) => {
+watch([() => store.ambientVolume, () => store.masterVolume], ([ambient, master]) => {
   activeSounds.value.forEach(key => {
     if (soundInstances.value[key]) {
-      soundInstances.value[key].volume = 0.3 * newVol * masterVolume.value
+      soundInstances.value[key].volume = 0.3 * ambient * master
     }
   })
-})
+}, { immediate: true })
 
 // Отключать все звуки при активации hideSounds
 

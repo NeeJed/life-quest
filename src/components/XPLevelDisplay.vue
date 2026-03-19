@@ -7,7 +7,7 @@
       <div class="flex flex-col gap-1 text-center">
         <div class="flex flex-col gap-0.5">
           <div class="flex gap-1 items-center justify-center">
-            <p class="text-lg font-bold text-rich-brown">{{ xp }}</p>
+            <p class="text-lg font-bold text-rich-brown">{{ xp.toFixed(0) }}</p>
             <p class="text-sm text-very-dark-grayish-blue">XP</p>
           </div>
           <div class="w-full bg-rich-brown/20 rounded-full h-2 mt-2">

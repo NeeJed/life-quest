@@ -1,9 +1,9 @@
 <template>
-  <div class="volume-panel">
-    <BaseButton @click="togglePanel" variant="secondary" class="mb-2! p-3! rounded-full! shadow-xl border-2 border-rich-brown duration-300!">
+  <div class="volume-panel relative">
+    <BaseButton @click="togglePanel" variant="secondary" class="p-3! rounded-full! shadow-xl border-2 border-rich-brown duration-300!" title="Настройки громкости">
       🔊
     </BaseButton>
-    <div v-if="isPanelOpen" class="flex flex-col gap-2 animate-fade-in bg-white/90 p-4 rounded-2xl shadow-lg border-2 border-muted-gold/50">
+    <div v-if="isPanelOpen" class="absolute top-0 right-15 w-85 flex flex-col gap-2 animate-fade-in bg-white/90 p-4 rounded-2xl shadow-lg border-2 border-muted-gold/50">
       <div class="flex items-center gap-2">
         <span class="text-rich-brown w-20">Общая:</span>
         <BaseInput type="range" v-model="masterVolume" :min="'0'" :max="'1'" :step="'0.01'" @update:modelValue="setMasterVolume" class="flex-1" />
@@ -29,13 +29,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import BaseButton from '@/shared/ui/BaseButton.vue'
-import BaseInput from '@/shared/ui/BaseInput.vue'
-import { useAudio } from '@/shared/hooks/useAudio'
+import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useGameStore } from '@/stores/game'
 
 const isPanelOpen = ref(false)
-const { masterVolume, musicVolume, ambientVolume, interfaceVolume } = useAudio()
+const store = useGameStore()
+const { masterVolume, musicVolume, ambientVolume, interfaceVolume } = storeToRefs(store)
 
 const togglePanel = () => {
   isPanelOpen.value = !isPanelOpen.value

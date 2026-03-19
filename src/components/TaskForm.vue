@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-lg border-2 border-yellow-300/50 mb-4">
-    <h3 class="text-lg font-semibold text-rich-brown mb-2">➕ Добавить задачу</h3>
+  <div class="bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-lg border-2 border-yellow-300/50 mb-4!">
+    <h3 class="text-lg font-semibold text-rich-brown mb-2!">➕ Добавить задачу</h3>
     <form @submit.prevent="handleSubmit" class="space-y-3">
       <TaskFormFields :form-data="form" />
       <BaseButton 
         type="submit"
-        class="w-full"
+        class="w-full mt-2!"
       >
         Добавить задачу
       </BaseButton>

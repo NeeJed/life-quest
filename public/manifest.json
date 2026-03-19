@@ -1,11 +1,12 @@
 {
-  "name": "Finance Tracker",
-  "short_name": "FinTracker",
-  "description": "Личный финансовый трекер",
+  "name": "Life Quest",
+  "short_name": "LifeQuest",
+  "description": "Приложение для менеджмента жизни",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#1f2937",
+  "theme_color": "#A8D8B9",
   "icons": [
     {
       "src": "/pwa-192x192.png",
@@ -17,5 +18,8 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "categories": ["productivity", "lifestyle"],
+  "lang ": "ru",
+  "dir": "ltr"
 }

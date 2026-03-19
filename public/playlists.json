@@ -1,0 +1,121 @@
+{
+  "happy": [
+    {
+      "id": 1,
+      "title": "i-mage",
+      "url": "/audio/playlists/happy/05. i-mage.flac"
+    }
+  ],
+  "motivation": [
+    {
+      "id": 1,
+      "title": "GOD OF INK - mpi",
+      "url": "/audio/playlists/motivation/01. GOD OF INK - mpi.flac"
+    },
+    {
+      "id": 2,
+      "title": "JEOPARDY",
+      "url": "/audio/playlists/motivation/01. JEOPARDY.flac"
+    },
+    {
+      "id": 3,
+      "title": "NOISEofRAIN",
+      "url": "/audio/playlists/motivation/06. NOISEofRAIN.flac"
+    },
+    {
+      "id": 4,
+      "title": "01 PARAGON",
+      "url": "/audio/playlists/motivation/9.01 PARAGON.flac"
+    },
+    {
+      "id": 5,
+      "title": "Bon Jovi - It' My Life",
+      "url": "/audio/playlists/motivation/Bon Jovi - It' My Life.mp3"
+    },
+    {
+      "id": 6,
+      "title": "Bon Jovi - Livin On A Prayer",
+      "url": "/audio/playlists/motivation/Bon Jovi - Livin On A Prayer.flac"
+    },
+    {
+      "id": 7,
+      "title": "Eminem - Lose Yourself",
+      "url": "/audio/playlists/motivation/Eminem - Lose Yourself.flac"
+    },
+    {
+      "id": 8,
+      "title": "Eminem - Sing For The Moment",
+      "url": "/audio/playlists/motivation/Eminem - Sing For The Moment.flac"
+    },
+    {
+      "id": 9,
+      "title": "Europe - The Final Countdown",
+      "url": "/audio/playlists/motivation/Europe - The Final Countdown.flac"
+    },
+    {
+      "id": 10,
+      "title": "Fall Out Boy - Centuries",
+      "url": "/audio/playlists/motivation/Fall Out Boy - Centuries.mp3"
+    },
+    {
+      "id": 11,
+      "title": "Fun ft. Janelle Monae - We Are Young",
+      "url": "/audio/playlists/motivation/Fun ft. Janelle Monae - We Are Young.flac"
+    },
+    {
+      "id": 12,
+      "title": "Hollywood Undead - We Are",
+      "url": "/audio/playlists/motivation/Hollywood Undead - We Are.mp3"
+    },
+    {
+      "id": 13,
+      "title": "Imagine Dragons - Believer",
+      "url": "/audio/playlists/motivation/Imagine Dragons - Believer.flac"
+    },
+    {
+      "id": 14,
+      "title": "Imagine Dragons - Radioactive",
+      "url": "/audio/playlists/motivation/Imagine Dragons - Radioactive.flac"
+    },
+    {
+      "id": 15,
+      "title": "Imagine Dragons - Whatever It Takes",
+      "url": "/audio/playlists/motivation/Imagine Dragons - Whatever It Takes.flac"
+    },
+    {
+      "id": 16,
+      "title": "Pixies – Where Is My Mind",
+      "url": "/audio/playlists/motivation/Pixies – Where Is My Mind.mp3"
+    },
+    {
+      "id": 17,
+      "title": "Scorpions - No One Likes You",
+      "url": "/audio/playlists/motivation/Scorpions - No One Likes You.mp3"
+    },
+    {
+      "id": 18,
+      "title": "The Script feat. will.i.am - Hall Of Fame",
+      "url": "/audio/playlists/motivation/The Script feat. will.i.am - Hall Of Fame.flac"
+    },
+    {
+      "id": 19,
+      "title": "The Show Must Go On",
+      "url": "/audio/playlists/motivation/The Show Must Go On.flac"
+    },
+    {
+      "id": 20,
+      "title": "Thousand Foot Krutch - War of Change",
+      "url": "/audio/playlists/motivation/Thousand Foot Krutch - War of Change.mp3"
+    },
+    {
+      "id": 21,
+      "title": "Zayn feat. Sia - Dusk Till Dawn",
+      "url": "/audio/playlists/motivation/Zayn feat. Sia - Dusk Till Dawn.flac"
+    },
+    {
+      "id": 22,
+      "title": "blur - song2",
+      "url": "/audio/playlists/motivation/blur - song2.mp3"
+    }
+  ]
+}

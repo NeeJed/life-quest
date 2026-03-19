@@ -1,0 +1,136 @@
+export interface Achievement {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  image: string;
+  condition: (stats: any) => boolean;
+  progress?: (stats: any) => { current: number; total: number };
+}
+
+export const achievements: Achievement[] = [
+  {
+    id: "first_task",
+    name: "Первая задача",
+    description: "Создайте свою первую задачу",
+    icon: "📝",
+    image: "/images/achievements/first_task.png",
+    condition: (stats) => stats.totalTasks >= 1,
+  },
+  {
+    id: "level_5",
+    name: "Мастер",
+    description: "Достигните 5 уровня",
+    icon: "⭐",
+    image: "/images/achievements/level_5.png",
+    condition: (stats) => stats.level >= 5,
+    progress: (stats) => ({ current: stats.level || 1, total: 5 }),
+  },
+  {
+    id: "ten_tasks_day",
+    name: "Продуктивный день",
+    description: "Выполните 10 задач в один день",
+    icon: "🔥",
+    image: "/images/achievements/ten_tasks_day.png",
+    condition: (stats) => stats.maxTasksInDay >= 10,
+    progress: (stats) => ({ current: stats.maxTasksInDay || 0, total: 10 }),
+  },
+  {
+    id: "fifty_tasks",
+    name: "Организатор",
+    description: "Создайте 50 задач",
+    icon: "📋",
+    image: "/images/achievements/fifty_tasks.png",
+    condition: (stats) => stats.totalTasks >= 50,
+    progress: (stats) => ({ current: stats.totalTasks, total: 50 }),
+  },
+  {
+    id: "hundred_completed",
+    name: "Исполнитель",
+    description: "Выполните 100 задач",
+    icon: "✅",
+    image: "/images/achievements/hundred_completed.png",
+    condition: (stats) => stats.completedTasks >= 100,
+    progress: (stats) => ({ current: stats.completedTasks, total: 100 }),
+  },
+  {
+    id: "no_overdue",
+    name: "Пунктуальный",
+    description: "Не просрочьте ни одной задачи (минимум 10 задач)",
+    icon: "⏰",
+    image: "/images/achievements/no_overdue.png",
+    condition: (stats) => stats.overdueTasks === 0 && stats.totalTasks >= 10,
+  },
+  {
+    id: "thousand_xp",
+    name: "Опытный",
+    description: "Наберите 1000 XP",
+    icon: "💎",
+    image: "/images/achievements/thousand_xp.png",
+    condition: (stats) => stats.totalXP >= 1000,
+    progress: (stats) => ({ current: stats.totalXP, total: 1000 }),
+  },
+  {
+    id: "level_10",
+    name: "Эксперт",
+    description: "Достигните 10 уровня",
+    icon: "🏆",
+    image: "/images/achievements/level_10.png",
+    condition: (stats) => stats.maxLevel >= 10,
+    progress: (stats) => ({ current: stats.maxLevel, total: 10 }),
+  },
+  {
+    id: "one_hour_app",
+    name: "Преданный",
+    description: "Проведите 1 час в приложении",
+    icon: "🕒",
+    image: "/images/achievements/one_hour_app.png",
+    condition: (stats) => stats.timeSpent >= 3600,
+    progress: (stats) => ({ current: stats.timeSpent, total: 3600 }),
+  },
+  {
+    id: "seven_active_days",
+    name: "Активный",
+    description: "Будьте активны 7 дней",
+    icon: "📅",
+    image: "/images/achievements/seven_active_days.png",
+    condition: (stats) => stats.activeDays >= 7,
+    progress: (stats) => ({ current: stats.activeDays, total: 7 }),
+  },
+  {
+    id: "twenty_tasks_day",
+    name: "Суперпродуктивный",
+    description: "Выполните 20 задач в один день",
+    icon: "🚀",
+    image: "/images/achievements/twenty_tasks_day.png",
+    condition: (stats) => stats.bestDayTasks >= 20,
+    progress: (stats) => ({ current: stats.bestDayTasks, total: 20 }),
+  },
+  {
+    id: "five_achievements",
+    name: "Коллекционер",
+    description: "Разблокируйте 5 достижений",
+    icon: "🎖️",
+    image: "/images/achievements/five_achievements.png",
+    condition: (stats) => stats.achievementsUnlocked >= 5,
+    progress: (stats) => ({ current: stats.achievementsUnlocked, total: 5 }),
+  },
+  {
+    id: "one_hour_timers",
+    name: "Таймерщик",
+    description: "Проведите 1 час на таймерах",
+    icon: "⏳",
+    image: "/images/achievements/one_hour_timers.png",
+    condition: (stats) => stats.timerTime >= 3600,
+    progress: (stats) => ({ current: stats.timerTime, total: 3600 }),
+  },
+  {
+    id: "fifty_music_plays",
+    name: "Меломан",
+    description: "Прослушайте 50 треков",
+    icon: "🎵",
+    image: "/images/achievements/fifty_music_plays.png",
+    condition: (stats) => stats.musicPlays >= 50,
+    progress: (stats) => ({ current: stats.musicPlays, total: 50 }),
+  },
+];

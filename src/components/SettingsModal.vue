@@ -10,7 +10,14 @@
       </BaseButton>
         
       <h3 class="text-2xl font-semibold text-rich-brown mb-6! text-center">⚙️ Настройки</h3>
-      <div class="space-y-6">
+      
+      <!-- Вкладки -->
+      <div class="flex border-b mb-4!">
+        <BaseButton @click="activeTab = 'main'" :class="['py-2 px-4 bg-transparent rounded-none', activeTab === 'main' ? 'border-b-2 border-soft-orange' : '']">Основные</BaseButton>
+        <BaseButton @click="activeTab = 'stats'" :class="['py-2 px-4 bg-transparent rounded-none', activeTab === 'stats' ? 'border-b-2 border-soft-orange' : '']">Статистика</BaseButton>
+      </div>
+
+      <div v-if="activeTab === 'main'" class="space-y-6">
         <div class="grid grid-cols-1 gap-4">
           <label class="flex items-center space-x-3">
             <BaseInput type="checkbox" v-model="localSettings.hideLeaderboard" @change="toggle('hideLeaderboard')" class="w-5! h-5! focus:ring-soft-orange" />
@@ -42,7 +49,29 @@
           </label>
         </div>
       </div>
-      <div class="flex justify-center mt-8!">
+
+      <div v-if="activeTab === 'stats'" class="space-y-6">
+        <div class="grid grid-cols-2 gap-4 text-sm text-rich-brown">
+          <div>Всего задач: {{ store.stats.totalTasks }}</div>
+          <div>Выполненных: {{ store.stats.completedTasks }}</div>
+          <div>Просроченных: {{ store.stats.overdueTasks }}</div>
+          <div>Общее XP: {{ store.stats.totalXP }}</div>
+          <div>Макс. уровень: {{ store.stats.maxLevel }}</div>
+          <div>Время в приложении: {{ formatTime(store.stats.timeSpent * 60) }}</div>
+          <div>Активных дней: {{ store.stats.activeDays }}</div>
+          <div>Лучший день: {{ store.stats.bestDayTasks }} задач</div>
+          <div>Достижений: {{ store.stats.achievementsUnlocked }}</div>
+          <div>Время на таймерах: {{ formatTime(store.stats.timerTime) }}</div>
+          <div>Прослушиваний музыки: {{ store.stats.musicPlays }}</div>
+        </div>
+        <div class="flex gap-2 mt-4!">
+          <BaseButton @click="store.exportStats" variant="secondary">Экспорт</BaseButton>
+          <input type="file" @change="store.importStats" accept=".json" class="hidden" ref="importInput" />
+          <BaseButton @click="triggerImport" variant="secondary">Импорт</BaseButton>
+        </div>
+      </div>
+
+      <div class="flex justify-center mt-8! gap-4">
         <BaseButton @click="resetSettings" variant="danger" class="px-6!">
           Сброс к умолчанию
         </BaseButton>
@@ -58,14 +87,16 @@
 <script setup lang="ts">
 import { ref, reactive, watch, onMounted, onUnmounted } from 'vue'
 import { useGameStore } from '../stores/game'
-import ResetProgressModal from './ResetProgressModal.vue';
+import ResetProgressModal from './ResetProgressModal.vue'
 
 const props = defineProps<{ isOpen: boolean }>()
 const emit = defineEmits<{ close: [] }>()
 
 const store = useGameStore()
+const activeTab = ref<'main' | 'stats'>('main')
 const localSettings = reactive({ ...store.settings })
 const showResetModal = ref(false)
+const importInput = ref<HTMLInputElement | null>(null)
 
 const toggle = (key: keyof typeof localSettings) => {
   store.toggleHide(key)
@@ -79,6 +110,16 @@ const resetSettings = () => {
 
 const resetProgress = () => {
   store.resetProgress()
+}
+
+const triggerImport = () => {
+  importInput.value?.click()
+}
+
+const formatTime = (seconds: number) => {
+  const hours = Math.floor(seconds / 3600)
+  const mins = Math.floor((seconds % 3600) / 60)
+  return `${hours}ч ${mins}м`
 }
 
 const handleKeydown = (e: KeyboardEvent) => {

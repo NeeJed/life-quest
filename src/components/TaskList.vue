@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-2xl border-4 border-yellow-300/50">
-    <h2 class="text-2xl font-semibold text-rich-brown mb-4 text-center">📝 Задачи</h2>
-    <div class="flex gap-2 mb-4">
+    <h2 class="text-2xl font-semibold text-rich-brown mb-4! text-center">📝 Задачи</h2>
+    <div class="flex gap-2 mb-2!">
       <BaseSelect v-model="sortBy" class="w-min">
         <option value="createdAt">По дате создания</option>
         <option value="deadline">По дедлайну</option>
@@ -13,7 +13,7 @@
         {{ sortOrder === 'asc' ? '↑' : '↓' }}
       </BaseButton>
     </div>
-    <BaseSelect v-model="selectedTag">
+    <BaseSelect v-model="selectedTag" class="mb-2!">
       <option value="">Все теги</option>
       <option value="работа">Работа</option>
       <option value="здоровье">Здоровье</option>
@@ -24,9 +24,9 @@
       <li 
         v-for="task in sortedTasks" 
         :key="task.id" 
-        class="p-4 bg-soft-mint/20 rounded-lg shadow-sm border border-muted-gold/30"
+        class="p-4 bg-soft-mint/20 rounded-lg shadow-sm border border-muted-gold/30 mb-1!"
       >
-        <div class="flex justify-between items-start mb-2">
+        <div class="flex justify-between items-start">
           <h4 :class="{ 'line-through text-very-dark-grayish-blue': task.completed }" class="font-semibold flex-1 text-rich-brown">{{ task.title }}</h4>
           <div class="flex gap-2">
             <BaseButton 

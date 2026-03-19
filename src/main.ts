@@ -16,17 +16,23 @@ import BaseSelect from "@/shared/ui/BaseSelect.vue";
 import BaseButton from "@/shared/ui/BaseButton.vue";
 import BaseTextarea from "@/shared/ui/BaseTextarea.vue";
 import BaseDatePicker from "@/shared/ui/BaseDatePicker.vue";
+import components from "@/shared/ui";
 import { useGameStore } from "./stores/game";
 import { useAudio } from "./shared/hooks/useAudio";
 
 const app = createApp(App);
 const pinia = createPinia();
 
-app.component("BaseInput", BaseInput);
-app.component("BaseSelect", BaseSelect);
-app.component("BaseButton", BaseButton);
-app.component("BaseTextarea", BaseTextarea);
-app.component("BaseDatePicker", BaseDatePicker);
+console.log(components);
+components.forEach((component) => {
+  app.component(component.__name!, component);
+});
+
+// app.component("BaseInput", BaseInput);
+// app.component("BaseSelect", BaseSelect);
+// app.component("BaseButton", BaseButton);
+// app.component("BaseTextarea", BaseTextarea);
+// app.component("BaseDatePicker", BaseDatePicker);
 
 app.use(Toast, toastOptions);
 app.use(pinia);

@@ -47,7 +47,7 @@ const emit = defineEmits<{
 }>()
 
 const inputClasses = computed(() => [
-  'w-full p-3 border-2 border-rich-brown/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-soft-orange bg-gray-50 text-rich-brown placeholder-rich-brown/50',
+  'w-full p-3! border-2! border-rich-brown/30! rounded-lg focus:outline-none focus:ring-2 focus:ring-soft-orange bg-gray-50 text-rich-brown placeholder-rich-brown/50',
   props.variant === 'primary' ? 'border-soft-orange' : ''
 ])
 

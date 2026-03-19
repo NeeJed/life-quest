@@ -6,6 +6,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import vueDevTools from "vite-plugin-vue-devtools";
 import tailwindcss from "@tailwindcss/vite";
 import { VitePWA } from "vite-plugin-pwa";
+import basicSsl from "@vitejs/plugin-basic-ssl";
 
 export default defineConfig({
   plugins: [
@@ -13,37 +14,54 @@ export default defineConfig({
     vueJsx(),
     vueDevTools(),
     tailwindcss(),
+    basicSsl(),
     VitePWA({
       registerType: "autoUpdate",
       workbox: {
-        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+        maximumFileSizeToCacheInBytes: 100 * 1024 * 1024,
+        globPatterns: ["**/*.{js,css,html,ico,png,svg,jpg,mp3,flac}"],
         runtimeCaching: [
           {
-            urlPattern: /^https:\/\/api\.example\.com\/.*/,
-            handler: "NetworkFirst",
+            urlPattern: /^https:\/\/.*\.(png|jpg|jpeg|svg|gif)$/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "images-cache",
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
+              },
+            },
           },
         ],
       },
       includeAssets: ["favicon.ico", "apple-touch-icon.png"],
       manifest: {
         name: "Life Quest",
-        short_name: "LifeQ",
-        description: "Жизнь - это игра",
-        theme_color: "#1f2937",
+        short_name: "LifeQuest",
+        description: "Приложение для менеджмента жизни",
+        theme_color: "#A8D8B9",
         background_color: "#ffffff",
         display: "standalone",
+        start_url: "/",
+        scope: "/",
         icons: [
           {
-            src: "pwa-192x192.png",
+            src: "android-chrome-192x192.png",
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "pwa-512x512.png",
+            src: "android-chrome-512x512.png",
             sizes: "512x512",
             type: "image/png",
           },
         ],
+        categories: ["productivity", "lifestyle"],
+        lang: "ru",
+        dir: "ltr",
+      },
+      devOptions: {
+        enabled: true,
       },
     }),
   ],
@@ -51,5 +69,10 @@ export default defineConfig({
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
+  },
+  server: {
+    https: true,
+    host: true,
+    port: 5173,
   },
 });

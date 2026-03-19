@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-3">
+  <div class="flex flex-col space-y-3 gap-1">
     <BaseInput v-model="formData.title" placeholder="Название задачи*" required />
     <BaseTextarea v-model="formData.description" placeholder="Описание (опционально)" :rows="3" />
     <BaseSelect v-model="formData.tag">

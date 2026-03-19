@@ -6,8 +6,8 @@
       <div class="text-sm text-rich-brown font-medium">Сейчас играет: {{ displayedTrackInfo.title }}</div>
       <div class="text-xs text-rich-brown/70">
         Плейлист: {{ displayedPlaylistName }}
-        <span v-if="isShuffled" class="ml-2 text-blue-600">🔀 Shuffle</span>
-        <span v-if="isRepeated" class="ml-2 text-green-600">🔁 Repeat</span>
+        <span v-if="isShuffled" class="ml-2 text-blue-600" title="Перемешать">🔀</span>
+        <span v-if="isRepeated" class="ml-2 text-green-600" title="Повторять">🔁</span>
       </div>
     </div>
     
@@ -52,9 +52,6 @@
 import { ref, computed, watch } from 'vue';
 import { useAudio } from '@/shared/hooks/useAudio';
 import { getPlaylistData, getPlaylistNames, getPlaylistLabels, formatTime } from '@/shared/utils/audioUtils';
-import BaseSelect from '@/shared/ui/BaseSelect.vue';
-import BaseButton from '@/shared/ui/BaseButton.vue';
-import BaseInput from '@/shared/ui/BaseInput.vue';
 
 const { playTrack: audioPlayTrack, pauseTrack, togglePlay, setVolume, setCurrentTime, nextTrack, prevTrack, toggleShuffle, toggleRepeat, isPlaying, volume, currentTime, duration, isShuffled, isRepeated, currentTrackInfo } = useAudio();
 const selectedPlaylist = ref<'nature' | 'city' | 'madcon'>('nature');
@@ -64,6 +61,8 @@ const playlistsData = getPlaylistData();
 const playlistNames = getPlaylistNames();
 const playlistLabels = getPlaylistLabels();
 const playlist = computed(() => playlistsData[selectedPlaylist.value]);
+
+console.log(playlistsData)
 
 const displayedTrackInfo = computed(() => {
   if (!currentTrackInfo.value) return null;

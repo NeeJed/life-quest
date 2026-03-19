@@ -1,6 +1,7 @@
 import { ref, watch, computed } from "vue";
 import { getPlaylists, getPlaylistNames } from "@/shared/utils/audioUtils";
 import { useGameStore } from "@/stores/game";
+import { storeToRefs } from "pinia";
 
 export const useAudio = () => {
   const audioContext = ref<AudioContext | null>(null);
@@ -19,6 +20,9 @@ export const useAudio = () => {
   const clickBuffer = ref<AudioBuffer | null>(null);
   const userInteracted = ref(false);
   const { settings } = useGameStore();
+  const store = useGameStore();
+  const { masterVolume, musicVolume, ambientVolume, interfaceVolume, stats } =
+    storeToRefs(store);
 
   const currentTrackInfo = ref<{
     url: string;
@@ -31,32 +35,6 @@ export const useAudio = () => {
   const playlistNames = ref(getPlaylistNames());
   const currentPlaylistIndex = ref(0);
   const currentIndex = ref(0);
-
-  const masterVolume = ref(
-    parseFloat(localStorage.getItem("masterVolume") || "1")
-  );
-  const musicVolume = ref(
-    parseFloat(localStorage.getItem("musicVolume") || "0.5")
-  );
-  const ambientVolume = ref(
-    parseFloat(localStorage.getItem("ambientVolume") || "0.3")
-  );
-  const interfaceVolume = ref(
-    parseFloat(localStorage.getItem("interfaceVolume") || "0.5")
-  );
-
-  watch(masterVolume, (newVol) =>
-    localStorage.setItem("masterVolume", newVol.toString())
-  );
-  watch(musicVolume, (newVol) =>
-    localStorage.setItem("musicVolume", newVol.toString())
-  );
-  watch(ambientVolume, (newVol) =>
-    localStorage.setItem("ambientVolume", newVol.toString())
-  );
-  watch(interfaceVolume, (newVol) =>
-    localStorage.setItem("interfaceVolume", newVol.toString())
-  );
 
   const allTracks = computed(() => {
     const tracks: Array<{
@@ -75,13 +53,14 @@ export const useAudio = () => {
   });
 
   watch(volume, (newVol) =>
-    localStorage.setItem("audioVolume", newVol.toString())
+    localStorage.setItem("audioVolume", newVol.toString()),
   );
 
   const initAudio = async () => {
     if (!audioContext.value) {
-      audioContext.value = new (window.AudioContext ||
-        (window as any).webkitAudioContext)();
+      audioContext.value = new (
+        window.AudioContext || (window as any).webkitAudioContext
+      )();
     }
     if (audioContext.value.state === "suspended") {
       await audioContext.value.resume();
@@ -112,14 +91,13 @@ export const useAudio = () => {
       const contentType = response.headers.get("content-type");
       if (!contentType?.includes("audio/")) {
         console.warn(
-          `Invalid content-type ${contentType} for ${url}, using fallback`
+          `Invalid content-type ${contentType} for ${url}, using fallback`,
         );
         throw new Error("Not audio content");
       }
       const arrayBuffer = await response.arrayBuffer();
-      const audioBuffer = await audioContext.value!.decodeAudioData(
-        arrayBuffer
-      );
+      const audioBuffer =
+        await audioContext.value!.decodeAudioData(arrayBuffer);
       const source = audioContext.value!.createBufferSource();
       source.buffer = audioBuffer;
       const gainNode = audioContext.value!.createGain();
@@ -149,7 +127,7 @@ export const useAudio = () => {
     index: number = 0,
     playlistIndex: number = 0,
     playlistName?: string,
-    trackTitle?: string
+    trackTitle?: string,
   ) => {
     if (errorCount.value >= MAX_ERROR_COUNT) {
       console.error("Error limit exceeded. Stopping.");
@@ -224,6 +202,7 @@ export const useAudio = () => {
       .then(() => {
         isPlaying.value = true;
         console.log("Playing:", url);
+        stats.value.musicPlays++;
       })
       .catch((error) => {
         console.error("Play error:", error);
@@ -264,7 +243,7 @@ export const useAudio = () => {
           currentPlaylist[0],
           0,
           currentPlaylistIndex.value,
-          playlistNames.value[currentPlaylistIndex.value]
+          playlistNames.value[currentPlaylistIndex.value],
         );
       }
     }
@@ -272,7 +251,9 @@ export const useAudio = () => {
 
   const setVolume = (vol: number) => {
     volume.value = Math.max(0, Math.min(1, vol));
-    if (currentTrack.value) currentTrack.value.volume = volume.value;
+    if (currentTrack.value)
+      currentTrack.value.volume =
+        volume.value * masterVolume.value * musicVolume.value;
   };
 
   const setCurrentTime = (time: number) => {
@@ -289,7 +270,7 @@ export const useAudio = () => {
     const currentTrackIndex = allTracks.value.findIndex(
       (track) =>
         track.playlistName === currentTrackInfo.value?.playlistName &&
-        track.trackIndex === currentTrackInfo.value?.trackIndex
+        track.trackIndex === currentTrackInfo.value?.trackIndex,
     );
     if (allTracks.value.length === 1) return allTracks.value[0];
     if (currentTrackIndex !== -1 && randomIndex === currentTrackIndex) {
@@ -309,7 +290,7 @@ export const useAudio = () => {
           randomTrack.url,
           randomTrack.trackIndex,
           randomTrack.playlistIndex,
-          randomTrack.playlistName
+          randomTrack.playlistName,
         );
       }
 
@@ -338,7 +319,7 @@ export const useAudio = () => {
           nextPlaylist[0],
           0,
           nextPlaylistIndex,
-          playlistNames.value[nextPlaylistIndex]
+          playlistNames.value[nextPlaylistIndex],
         );
       }
     } else {
@@ -347,7 +328,7 @@ export const useAudio = () => {
           currentPlaylist[nextIndex],
           nextIndex,
           currentPlaylistIndex.value,
-          playlistNames.value[currentPlaylistIndex.value]
+          playlistNames.value[currentPlaylistIndex.value],
         );
       }
     }
@@ -362,7 +343,7 @@ export const useAudio = () => {
           randomTrack.url,
           randomTrack.trackIndex,
           randomTrack.playlistIndex,
-          randomTrack.playlistName
+          randomTrack.playlistName,
         );
       }
       return;
@@ -386,7 +367,7 @@ export const useAudio = () => {
           prevPlaylist[prevPlaylist.length - 1],
           prevPlaylist.length - 1,
           prevPlaylistIndex,
-          playlistNames.value[prevPlaylistIndex]
+          playlistNames.value[prevPlaylistIndex],
         );
       }
     } else {
@@ -395,7 +376,7 @@ export const useAudio = () => {
           currentPlaylist[prevIndex],
           prevIndex,
           currentPlaylistIndex.value,
-          playlistNames.value[currentPlaylistIndex.value]
+          playlistNames.value[currentPlaylistIndex.value],
         );
       }
     }
@@ -412,15 +393,19 @@ export const useAudio = () => {
   };
 
   const playCompleteSound = () => {
-    if (!settings.hideSounds) {
-      playSound("/audio/interface/xp.mp3");
-    }
+    playSound("/audio/interface/xp.mp3");
   };
 
   const playLevelUpSound = () => {
-    if (!settings.hideSounds) {
-      playSound("/audio/interface/level.mp3");
-    }
+    playSound("/audio/interface/level.mp3");
+  };
+
+  const playTimerSound = () => {
+    playSound("/audio/interface/timer.mp3");
+  };
+
+  const playAchievementSound = () => {
+    playSound("/audio/interface/achievement.mp3");
   };
 
   const playHoverSound = () => {
@@ -471,19 +456,13 @@ export const useAudio = () => {
 
   // Обновление громкости в реальном времени
   watch(
-    [
-      () => masterVolume,
-      () => musicVolume,
-      () => ambientVolume,
-      () => interfaceVolume,
-    ],
-    () => {
+    [masterVolume, musicVolume, ambientVolume, interfaceVolume],
+    ([master, music, ambients, interfaces]) => {
       if (currentTrack.value) {
-        currentTrack.value.volume =
-          volume.value * masterVolume.value * musicVolume.value;
+        currentTrack.value.volume = volume.value * master * music;
       }
     },
-    { immediate: true }
+    { immediate: true },
   );
 
   const initInterfaceSounds = async () => {
@@ -498,12 +477,10 @@ export const useAudio = () => {
           hoverResponse.arrayBuffer(),
           clickResponse.arrayBuffer(),
         ]);
-        hoverBuffer.value = await audioContext.value!.decodeAudioData(
-          hoverArrayBuffer
-        );
-        clickBuffer.value = await audioContext.value!.decodeAudioData(
-          clickArrayBuffer
-        );
+        hoverBuffer.value =
+          await audioContext.value!.decodeAudioData(hoverArrayBuffer);
+        clickBuffer.value =
+          await audioContext.value!.decodeAudioData(clickArrayBuffer);
       } catch (error) {
         console.warn("Failed to preload interface sounds:", error);
       }
@@ -536,6 +513,8 @@ export const useAudio = () => {
     playClickSound,
     playCompleteSound,
     playLevelUpSound,
+    playTimerSound,
+    playAchievementSound,
     initInterfaceSounds,
     masterVolume,
     musicVolume,
